@@ -24,7 +24,7 @@ public class HolonomicMultiControl extends IterativeRobot {
 
     int stage = 0;
     float speed = .5f;
-    float time = 1;
+    float time = 1.0f;
     
     public void robotInit() {
         driveTrain = new RobotDrive(1, 2, 3, 4);
@@ -56,20 +56,12 @@ public class HolonomicMultiControl extends IterativeRobot {
 
     }
 
+    
     public void teleopPeriodic() {
         driveTrain.mecanumDrive_Cartesian(joystick.getX(), joystick2.getY(), joystick.getZ(), 0);
        // driveTrain.mecanumDrive_Cartesian(speed, speed, 0, 0);
+        
     }
 
 
-
-   
-
-
-
-
-    
-
-    
-    
 }
