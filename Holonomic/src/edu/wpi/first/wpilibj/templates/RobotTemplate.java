@@ -47,20 +47,21 @@ public class RobotTemplate extends IterativeRobot {
      */
     int stage = 0;
     float speed = .5f;
+    float time = 1;
 
     public void autonomousPeriodic() {
 
         driveTrain.mecanumDrive_Cartesian(speed, 0, 0, 0);
-        Timer.delay(1);
+        Timer.delay(time);
         driveTrain.stopMotor();        
         driveTrain.mecanumDrive_Cartesian(0, speed, 0, 0);
-        Timer.delay(1);
+        Timer.delay(time);
         driveTrain.stopMotor();
         driveTrain.mecanumDrive_Cartesian(-speed, 0, 0, 0);
-        Timer.delay(1);
+        Timer.delay(time);
         driveTrain.stopMotor();
         driveTrain.mecanumDrive_Cartesian(0, -speed, 0, 0);
-        Timer.delay(1);
+        Timer.delay(time);
         driveTrain.stopMotor();
         
 
