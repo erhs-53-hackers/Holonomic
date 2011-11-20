@@ -46,7 +46,8 @@ public class RobotTemplate extends IterativeRobot {
      * This function is called periodically during autonomous
      */
     int stage = 0;
-    float speed = 0.3f;
+    float speed = 0.5f;
+    float time = 1;
     float inc = 0.05f;
     float x = 1;
     float y = 0;
@@ -81,22 +82,26 @@ public class RobotTemplate extends IterativeRobot {
         msg.printLn(s);
     }
 
+   
+
+
     public void autonomousPeriodic() {
 
         /*
         driveTrain.mecanumDrive_Cartesian(speed, 0, 0, 0);
-        Timer.delay(1);
-        driveTrain.stopMotor();
+
+        Timer.delay(time);
+        driveTrain.stopMotor();        
+
         driveTrain.mecanumDrive_Cartesian(0, speed, 0, 0);
-        Timer.delay(1);
+        Timer.delay(time);
         driveTrain.stopMotor();
         driveTrain.mecanumDrive_Cartesian(-speed, 0, 0, 0);
-        Timer.delay(1);
+        Timer.delay(time);
         driveTrain.stopMotor();
         driveTrain.mecanumDrive_Cartesian(0, -speed, 0, 0);
-        Timer.delay(1);
+        Timer.delay(time);
         driveTrain.stopMotor();
-         * 
          */
         circle();
 
