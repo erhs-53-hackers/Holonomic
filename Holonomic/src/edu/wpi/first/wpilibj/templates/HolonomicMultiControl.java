@@ -2,6 +2,7 @@
  * Testing the use of multiple controllers at the same time
  * And possibly the use of sensors and/or end effectors
  */
+
 package edu.wpi.first.wpilibj.templates;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -11,9 +12,10 @@ import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Timer;
 
 /**
- * The Java Virtual Machine will already run these files without calling them
+ * The Java Virtual Machine will already run these functions without calling them
  * Don't Change Their Names!
  */
+
 public class HolonomicMultiControl extends IterativeRobot {
 
     RobotDrive driveTrain;
@@ -31,7 +33,6 @@ public class HolonomicMultiControl extends IterativeRobot {
         joystick = new Joystick(1);
         joystick2 = new Joystick(2);
         msg = new Messager();
-        //motor = new Jaguar(1);
         msg.printLn("Testing the use of multiple controllers");
         getWatchdog().setExpiration(10);
         driveTrain.setSafetyEnabled(false);
@@ -53,6 +54,7 @@ public class HolonomicMultiControl extends IterativeRobot {
         driveTrain.mecanumDrive_Cartesian(0, -speed, 0, 0);
         Timer.delay(time);
         driveTrain.stopMotor();
+        
 
     }
 
