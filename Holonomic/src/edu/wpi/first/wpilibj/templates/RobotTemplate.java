@@ -49,7 +49,6 @@ public class RobotTemplate extends IterativeRobot {
         joystick = new Joystick(1);
         msg = new Messager();
         msg.printLn("Welcome to the Area 53 Holonomic Experience");
-
         getWatchdog().setExpiration(10);
         driveTrain.setSafetyEnabled(false);
 
