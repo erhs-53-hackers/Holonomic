@@ -30,6 +30,7 @@ public class RobotTemplate extends IterativeRobot {
     Joystick joystick;
     Messager msg;
     Jaguar motor;
+    AxisCamera camera = AxisCamera.getInstance()
 
     //set up constant variables
     int stage = 0;
@@ -84,7 +85,7 @@ public class RobotTemplate extends IterativeRobot {
 
         driveTrain.mecanumDrive_Cartesian(x * speed, y * speed, 0, 0);
         Timer.delay(0.3);
-        String s = "stage:"+stage+"X:"+x+"Y:"+y;
+        String s = "Stage: "+stage+" X: "+x+" Y: "+y;
         msg.printLn(s);
     }
     
@@ -109,7 +110,7 @@ public class RobotTemplate extends IterativeRobot {
     public void teleopPeriodic() {
         driveTrain.mecanumDrive_Cartesian(joystick.getX(), joystick.getY(), joystick.getZ(), 0);
         try {
-            AxisCamera.getInstance().getImage();
+            ColorImage image = AxisCamera.getInstance().getImage();
         } catch (AxisCameraException ex) {
         } catch (NIVisionException ex) {
         }
