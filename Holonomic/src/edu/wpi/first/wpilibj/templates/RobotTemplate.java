@@ -30,7 +30,6 @@ public class RobotTemplate extends IterativeRobot {
     Joystick joystick;
     Messager msg;
     Jaguar motor;
-    AxisCamera camera = AxisCamera.getInstance()
 
     //set up constant variables
     int stage = 0;
@@ -46,8 +45,6 @@ public class RobotTemplate extends IterativeRobot {
     */
     
     public void robotInit() {
-        Timer.delay(8);
-        AxisCamera camera = AxisCamera.getInstance();
         driveTrain = new RobotDrive(1, 2, 3, 4);
         joystick = new Joystick(1);
         msg = new Messager();
