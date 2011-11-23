@@ -32,6 +32,14 @@ public class RobotTemplate extends IterativeRobot {
     Joystick joystick;
     Messager msg;
     Jaguar motor;
+    boolean buttonA = joystick.getRawButton(1);
+    boolean buttonB = joystick.getRawButton(2);
+    boolean buttonX = joystick.getRawButton(3);
+    boolean buttonY = joystick.getRawButton(4);
+    boolean leftBumper = joystick.getRawButton(5);
+    boolean rightBumper = joystick.getRawButton(6);
+    boolean leftStickDown = joystick.getRawButton(9);
+    boolean rightStickDown = joystick.getRawButton(10);
 
     //set up constant variables
     int stage = 0;
@@ -56,7 +64,8 @@ public class RobotTemplate extends IterativeRobot {
 
     }
 
-    private void circle() {
+    private void circle(int stage, float speed, float time, float inc,
+            float x, float y) {
         switch (stage) {
             case 0:
                 x -= inc;
@@ -92,8 +101,7 @@ public class RobotTemplate extends IterativeRobot {
 
     public void autonomousPeriodic() {
 
-        circle();
-
+        circle(stage, speed, time, inc, x, y);
     }
 
     /**
@@ -107,6 +115,9 @@ public class RobotTemplate extends IterativeRobot {
         } catch (AxisCameraException ex) {
         } catch (NIVisionException ex) {
         }
+        
+        if (leftBumper) { circle(0, 0.5f, 1, .01f, 1, 0); }
 
+        
     }
 }
