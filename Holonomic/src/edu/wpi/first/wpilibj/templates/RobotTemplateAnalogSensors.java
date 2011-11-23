@@ -21,7 +21,7 @@ import edu.wpi.first.wpilibj.AnalogChannel;
  * creating this project, you must also update the manifest file in the resource
  * directory.
  */
-public class RobotTemplate extends IterativeRobot {
+public class RobotTemplateAnalogSensors extends IterativeRobot {
 
     /**
      * This function is run when the robot is first started up and should be
@@ -31,7 +31,7 @@ public class RobotTemplate extends IterativeRobot {
     Joystick joystick;
     Messager msg;
     Jaguar motor;
-    AnalogChannel blurb = new AnalogChannel(1);
+    AnalogChannel analog1 = new AnalogChannel(1);
     
     
     public void robotInit() {
@@ -53,7 +53,7 @@ public class RobotTemplate extends IterativeRobot {
     float speed = .6f;
 
     public void autonomousPeriodic() {
-        if(blurb.getAverageVoltage() > 5){
+        if(analog1.getAverageVoltage() > 5){
         driveTrain.mecanumDrive_Cartesian(speed, 0, 0, 0);
         Timer.delay(1);
         driveTrain.stopMotor();        
@@ -67,7 +67,7 @@ public class RobotTemplate extends IterativeRobot {
         Timer.delay(1);
         driveTrain.stopMotor();}
         
-        if(blurb.getAverageVoltage() < 5){driveTrain.mecanumDrive_Cartesian(speed, 0, 0, 0);
+        if(analog1.getAverageVoltage() < 5){driveTrain.mecanumDrive_Cartesian(speed, 0, 0, 0);
         Timer.delay(1);
         driveTrain.stopMotor();        
         driveTrain.mecanumDrive_Cartesian(0, speed, 0, 0);
