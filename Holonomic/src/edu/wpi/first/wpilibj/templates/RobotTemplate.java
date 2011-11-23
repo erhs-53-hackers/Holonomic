@@ -1,9 +1,10 @@
 /**
-/* Copyright (c) FIRST 2008. All Rights Reserved.                             
-/* Open Source Software - may be modified and shared by FRC teams. The code   
-/* must be accompanied by the FIRST BSD license file in the root directory of 
-/* the project.                                                               
-*/
+ * Copyright (c) FIRST 2008. All Rights Reserved.
+ * Copyright (c) FRC Team 53.  All Rights Reserved
+ * By FRC Team 53 - The Area 53 Cow Abductors
+ * Released under the GNU General Public License v. 3 or later
+ */
+
 package edu.wpi.first.wpilibj.templates;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -17,15 +18,16 @@ import edu.wpi.first.wpilibj.image.ColorImage;
 import edu.wpi.first.wpilibj.image.NIVisionException;
 
 /**
- * The VM is configured to automatically run this class, and to call the
- * functions corresponding to each mode, as described in the IterativeRobot
- * documentation. If you change the name of this class or the package after
- * creating this project, you must also update the manifest file in the resource
- * directory.
+ * The Java Virtual Machine (VM) is configured to run each function defined
+ * below automatically when the driver station switches to each mode
+ * The function extends and overwrites the IterativeRobot class template
+ * DO NOT CHANGE THE NAMES OF THE CLASSES OR FUNCTIONS OR YOU WILL HAVE TO
+ * UPDATE THE MANIFEST FILE IN THE RESOURCE DIRECTORY
  */
+
 public class RobotTemplate extends IterativeRobot {
 
-    //initialize variables
+    //initialize robot variables
     RobotDrive driveTrain;
     Joystick joystick;
     Messager msg;
@@ -53,7 +55,6 @@ public class RobotTemplate extends IterativeRobot {
         driveTrain.setSafetyEnabled(false);
 
     }
-
 
     private void circle() {
         switch (stage) {
@@ -85,9 +86,6 @@ public class RobotTemplate extends IterativeRobot {
         msg.printLn(s);
     }
     
-
-
-   
     /**
      * This function is called periodically during autonomous
      */
@@ -98,7 +96,6 @@ public class RobotTemplate extends IterativeRobot {
 
     }
 
-    
     /**
      * This function is called periodically during TeleOp mode
      */
