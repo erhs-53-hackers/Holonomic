@@ -44,7 +44,7 @@ public class RobotTemplate extends IterativeRobot {
     //set up constant variables
     int stage = 0;
     float speed = 0.5f;
-    float time = 1;
+    float time = 0.5f;
     float inc = 0.05f;
     float x = 1;
     float y = 0;
@@ -101,7 +101,7 @@ public class RobotTemplate extends IterativeRobot {
         }
 
         driveTrain.mecanumDrive_Cartesian(x * speed, y * speed, 0, 0);
-        Timer.delay(0.3);
+        Timer.delay(time);
         String s = "Stage: "+stage+" X: "+x+" Y: "+y;
         msg.printLn(s);
     }
