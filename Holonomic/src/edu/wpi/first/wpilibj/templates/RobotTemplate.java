@@ -4,9 +4,9 @@
  * By FRC Team 53 - The Area 53 Cow Abductors
  * Released under the GNU General Public License v. 3 or later
  */
-
 package edu.wpi.first.wpilibj.templates;
 
+import edu.wpi.first.wpilibj.AnalogChannel;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.Joystick;
@@ -24,7 +24,6 @@ import edu.wpi.first.wpilibj.image.NIVisionException;
  * DO NOT CHANGE THE NAMES OF THE CLASSES OR FUNCTIONS OR YOU WILL HAVE TO
  * UPDATE THE MANIFEST FILE IN THE RESOURCE DIRECTORY
  */
-
 public class RobotTemplate extends IterativeRobot {
 
     //initialize robot variables
@@ -32,6 +31,7 @@ public class RobotTemplate extends IterativeRobot {
     Joystick joystick;
     Messager msg;
     Jaguar motor;
+    AnalogChannel analog1;
     boolean buttonA = joystick.getRawButton(1);
     boolean buttonB = joystick.getRawButton(2);
     boolean buttonX = joystick.getRawButton(3);
@@ -40,7 +40,6 @@ public class RobotTemplate extends IterativeRobot {
     boolean rightBumper = joystick.getRawButton(6);
     boolean leftStickDown = joystick.getRawButton(9);
     boolean rightStickDown = joystick.getRawButton(10);
-
     //set up constant variables
     int stage = 0;
     float speed = 0.5f;
@@ -50,10 +49,9 @@ public class RobotTemplate extends IterativeRobot {
     float y = 0;
 
     /**
-    * This function is run when the robot is first started up and should be
-    * used for any initialization code.
-    */
-
+     * This function is run when the robot is first started up and should be
+     * used for any initialization code.
+     */
     private void updateButtons() {
         buttonA = joystick.getRawButton(1);
         buttonB = joystick.getRawButton(2);
@@ -64,11 +62,12 @@ public class RobotTemplate extends IterativeRobot {
         leftStickDown = joystick.getRawButton(9);
         rightStickDown = joystick.getRawButton(10);
     }
-    
+
     public void robotInit() {
         driveTrain = new RobotDrive(1, 2, 3, 4);
         joystick = new Joystick(1);
         msg = new Messager();
+        analog1 = new AnalogChannel(1);
         msg.printLn("Welcome to the Area 53 Holonomic Experience");
         getWatchdog().setExpiration(10);
         driveTrain.setSafetyEnabled(false);
@@ -81,35 +80,74 @@ public class RobotTemplate extends IterativeRobot {
             case 0:
                 x -= inc;
                 y += inc;
-                if(y == 1) stage++;
+                if (y == 1) {
+                    stage++;
+                }
                 break;
             case 1:
                 x -= inc;
                 y -= inc;
-                if(x == -1) stage++;
+                if (x == -1) {
+                    stage++;
+                }
                 break;
             case 2:
                 x += inc;
                 y -= inc;
-                if(y == -1) stage++;
+                if (y == -1) {
+                    stage++;
+                }
                 break;
             case 3:
                 x += inc;
                 y += inc;
-                if(x == 1) stage = 0;
+                if (x == 1) {
+                    stage = 0;
+                }
                 break;
         }
 
         driveTrain.mecanumDrive_Cartesian(x * speed, y * speed, 0, 0);
         Timer.delay(time);
-        String s = "Stage: "+stage+" X: "+x+" Y: "+y;
+        String s = "Stage: " + stage + " X: " + x + " Y: " + y;
         msg.printLn(s);
     }
-    
+
+    private void square() {
+        if (analog1.getAverageVoltage() > 5) {
+            driveTrain.mecanumDrive_Cartesian(speed, 0, 0, 0);
+            Timer.delay(1);
+            driveTrain.stopMotor();
+            driveTrain.mecanumDrive_Cartesian(0, speed, 0, 0);
+            Timer.delay(1);
+            driveTrain.stopMotor();
+            driveTrain.mecanumDrive_Cartesian(-speed, 0, 0, 0);
+            Timer.delay(1);
+            driveTrain.stopMotor();
+            driveTrain.mecanumDrive_Cartesian(0, -speed, 0, 0);
+            Timer.delay(1);
+            driveTrain.stopMotor();
+        }
+
+        if (analog1.getAverageVoltage() < 5) {
+            driveTrain.mecanumDrive_Cartesian(speed, 0, 0, 0);
+            Timer.delay(1);
+            driveTrain.stopMotor();
+            driveTrain.mecanumDrive_Cartesian(0, speed, 0, 0);
+            Timer.delay(1);
+            driveTrain.stopMotor();
+            driveTrain.mecanumDrive_Cartesian(-speed, 0, 0, 0);
+            Timer.delay(1);
+            driveTrain.stopMotor();
+            driveTrain.mecanumDrive_Cartesian(0, -speed, 0, 0);
+            Timer.delay(1);
+            driveTrain.stopMotor();
+        }
+    }
+
     /**
      * This function is called periodically during autonomous
      */
-
     public void autonomousPeriodic() {
         circle(stage, speed, time, inc, x, y);
     }
@@ -117,13 +155,14 @@ public class RobotTemplate extends IterativeRobot {
     /**
      * This function is called periodically during TeleOp mode
      */
-    
     public void teleopPeriodic() {
         updateButtons();
 
         driveTrain.mecanumDrive_Cartesian(joystick.getX(), joystick.getY(), joystick.getZ(), 0);
-        
-        if (leftBumper) { circle(0, 0.5f, 1, .01f, 1, 0); }
+
+        if (leftBumper) {
+            circle(0, 0.5f, 1, .01f, 1, 0);
+        }
 
 
         try {
