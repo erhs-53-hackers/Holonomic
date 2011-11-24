@@ -80,28 +80,28 @@ public class RobotTemplate extends IterativeRobot {
             case 0:
                 x -= inc;
                 y += inc;
-                if (y == 1) {
+                if (y >= 1) {
                     stage++;
                 }
                 break;
             case 1:
                 x -= inc;
                 y -= inc;
-                if (x == -1) {
+                if (x <= -1) {
                     stage++;
                 }
                 break;
             case 2:
                 x += inc;
                 y -= inc;
-                if (y == -1) {
+                if (y <= -1) {
                     stage++;
                 }
                 break;
             case 3:
                 x += inc;
                 y += inc;
-                if (x == 1) {
+                if (x >= 1) {
                     stage = 0;
                 }
                 break;
@@ -160,9 +160,10 @@ public class RobotTemplate extends IterativeRobot {
 
         driveTrain.mecanumDrive_Cartesian(joystick.getX(), joystick.getY(), joystick.getZ(), 0);
 
-        if (leftBumper)
+        if (leftBumper) {
             circle(0, 0.5f, 1, .01f, 1, 0);
-        
+        }
+
 
 
         try {
