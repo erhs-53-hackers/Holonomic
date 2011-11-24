@@ -3,3 +3,7 @@
 *.suite
 *.metadata
 *.sym
+*.xml
+*.nblh~
+*.MF
+*.properties
