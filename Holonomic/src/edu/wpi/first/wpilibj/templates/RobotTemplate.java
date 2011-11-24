@@ -70,7 +70,7 @@ public class RobotTemplate extends IterativeRobot {
             case 0:
                 x -= inc;
                 y += inc;
-                if(x == 0) stage++;
+                if(y == 1) stage++;
                 break;
             case 1:
                 x -= inc;
@@ -80,7 +80,7 @@ public class RobotTemplate extends IterativeRobot {
             case 2:
                 x += inc;
                 y -= inc;
-                if(x == 0) stage++;
+                if(y == -1) stage++;
                 break;
             case 3:
                 x += inc;
