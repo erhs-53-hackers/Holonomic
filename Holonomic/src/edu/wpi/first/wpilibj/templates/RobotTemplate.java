@@ -53,6 +53,17 @@ public class RobotTemplate extends IterativeRobot {
     * This function is run when the robot is first started up and should be
     * used for any initialization code.
     */
+
+    private void updateButtons() {
+        buttonA = joystick.getRawButton(1);
+        buttonB = joystick.getRawButton(2);
+        buttonX = joystick.getRawButton(3);
+        buttonY = joystick.getRawButton(4);
+        leftBumper = joystick.getRawButton(5);
+        rightBumper = joystick.getRawButton(6);
+        leftStickDown = joystick.getRawButton(9);
+        rightStickDown = joystick.getRawButton(10);
+    }
     
     public void robotInit() {
         driveTrain = new RobotDrive(1, 2, 3, 4);
@@ -100,7 +111,6 @@ public class RobotTemplate extends IterativeRobot {
      */
 
     public void autonomousPeriodic() {
-
         circle(stage, speed, time, inc, x, y);
     }
 
@@ -109,15 +119,17 @@ public class RobotTemplate extends IterativeRobot {
      */
     
     public void teleopPeriodic() {
+        updateButtons();
+
         driveTrain.mecanumDrive_Cartesian(joystick.getX(), joystick.getY(), joystick.getZ(), 0);
+        
+        if (leftBumper) { circle(0, 0.5f, 1, .01f, 1, 0); }
+
+
         try {
             ColorImage image = AxisCamera.getInstance().getImage();
         } catch (AxisCameraException ex) {
         } catch (NIVisionException ex) {
         }
-        
-        if (leftBumper) { circle(0, 0.5f, 1, .01f, 1, 0); }
-
-        
     }
 }
