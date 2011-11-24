@@ -32,14 +32,14 @@ public class RobotTemplate extends IterativeRobot {
     Messager msg;
     Jaguar motor;
     AnalogChannel analog1;
-    boolean buttonA = joystick.getRawButton(1);
-    boolean buttonB = joystick.getRawButton(2);
-    boolean buttonX = joystick.getRawButton(3);
-    boolean buttonY = joystick.getRawButton(4);
-    boolean leftBumper = joystick.getRawButton(5);
-    boolean rightBumper = joystick.getRawButton(6);
-    boolean leftStickDown = joystick.getRawButton(9);
-    boolean rightStickDown = joystick.getRawButton(10);
+    boolean buttonA;
+    boolean buttonB;
+    boolean buttonX;
+    boolean buttonY;
+    boolean leftBumper;
+    boolean rightBumper;
+    boolean leftStickDown;
+    boolean rightStickDown;
     //set up constant variables
     int stage = 0;
     float speed = 0.5f;
@@ -160,9 +160,9 @@ public class RobotTemplate extends IterativeRobot {
 
         driveTrain.mecanumDrive_Cartesian(joystick.getX(), joystick.getY(), joystick.getZ(), 0);
 
-        if (leftBumper) {
+        if (leftBumper)
             circle(0, 0.5f, 1, .01f, 1, 0);
-        }
+        
 
 
         try {
