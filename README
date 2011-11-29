@@ -1,1 +1,4 @@
 Holonomic bot code
+//The file 'RobotTemplateAnalogSensors' is a replacement for 'RobotTemplate', with *hypothetical*
+ analog sensor support.
+its here b/c i got tired of typing the file path to run 'Git add'
