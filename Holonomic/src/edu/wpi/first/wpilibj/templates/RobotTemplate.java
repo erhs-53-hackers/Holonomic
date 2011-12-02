@@ -32,14 +32,7 @@ public class RobotTemplate extends IterativeRobot {
     Messager msg;
     Jaguar motor;
     AnalogChannel analog1;
-    boolean buttonA;
-    boolean buttonB;
-    boolean buttonX;
-    boolean buttonY;
-    boolean leftBumper;
-    boolean rightBumper;
-    boolean leftStickDown;
-    boolean rightStickDown;
+    Controls controls;
     //set up constant variables
     int stage = 0;
     float speed = 0.5f;
@@ -51,24 +44,15 @@ public class RobotTemplate extends IterativeRobot {
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
-     */
-    private void updateButtons() {
-        buttonA = joystick.getRawButton(1);
-        buttonB = joystick.getRawButton(2);
-        buttonX = joystick.getRawButton(3);
-        buttonY = joystick.getRawButton(4);
-        leftBumper = joystick.getRawButton(5);
-        rightBumper = joystick.getRawButton(6);
-        leftStickDown = joystick.getRawButton(9);
-        rightStickDown = joystick.getRawButton(10);
-    }
+     */   
 
     public void robotInit() {
         driveTrain = new RobotDrive(1, 2, 3, 4);
         joystick = new Joystick(1);
         msg = new Messager();
-        analog1 = new AnalogChannel(1);
-        msg.printLn("Welcome to the Area 53 Holonomic Experience");
+        controls = new Controls(joystick);
+        //analog1 = new AnalogChannel(1);
+        msg.printLn("Hello2");
         getWatchdog().setExpiration(10);
         driveTrain.setSafetyEnabled(false);
 
@@ -114,7 +98,7 @@ public class RobotTemplate extends IterativeRobot {
     }
 
     private void square() {
-        if (analog1.getAverageVoltage() > 5) {
+       
             driveTrain.mecanumDrive_Cartesian(speed, 0, 0, 0);
             Timer.delay(1);
             driveTrain.stopMotor();
@@ -127,9 +111,9 @@ public class RobotTemplate extends IterativeRobot {
             driveTrain.mecanumDrive_Cartesian(0, -speed, 0, 0);
             Timer.delay(1);
             driveTrain.stopMotor();
-        }
+        
 
-        if (analog1.getAverageVoltage() < 5) {
+       
             driveTrain.mecanumDrive_Cartesian(speed, 0, 0, 0);
             Timer.delay(1);
             driveTrain.stopMotor();
@@ -142,34 +126,39 @@ public class RobotTemplate extends IterativeRobot {
             driveTrain.mecanumDrive_Cartesian(0, -speed, 0, 0);
             Timer.delay(1);
             driveTrain.stopMotor();
-        }
+        
     }
 
     /**
      * This function is called periodically during autonomous
      */
     public void autonomousPeriodic() {
-        circle(stage, speed, time, inc, x, y);
+       // circle(stage, speed, time, inc, x, y);
+        square();
     }
 
     /**
      * This function is called periodically during TeleOp mode
      */
     public void teleopPeriodic() {
-        updateButtons();
+        
 
         driveTrain.mecanumDrive_Cartesian(joystick.getX(), joystick.getY(), joystick.getZ(), 0);
 
-        if (leftBumper) {
+        if (controls.leftBumper()) {
             circle(0, 0.5f, 1, .01f, 1, 0);
         }
+        
+        Timer.delay(0.05f);
 
 
-
+/*
         try {
             ColorImage image = AxisCamera.getInstance().getImage();
         } catch (AxisCameraException ex) {
         } catch (NIVisionException ex) {
         }
+ * */
+
     }
 }
