@@ -52,7 +52,7 @@ public class RobotTemplate extends IterativeRobot {
         msg = new Messager();
         controls = new Controls(joystick);
         //analog1 = new AnalogChannel(1);
-        msg.printLn("Hello2");
+        msg.printLn("Hello C:");
         getWatchdog().setExpiration(10);
         driveTrain.setSafetyEnabled(false);
 
