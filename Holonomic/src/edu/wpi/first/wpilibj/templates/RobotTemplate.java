@@ -115,7 +115,7 @@ public class RobotTemplate extends IterativeRobot {
 
        
             driveTrain.mecanumDrive_Cartesian(speed, 0, 0, 0);
-            Timer.delay(1);
+            Timer.delay(2);
             driveTrain.stopMotor();
             driveTrain.mecanumDrive_Cartesian(0, speed, 0, 0);
             Timer.delay(1);
