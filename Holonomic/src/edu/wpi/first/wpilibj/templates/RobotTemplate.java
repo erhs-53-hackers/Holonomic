@@ -29,17 +29,9 @@ public class RobotTemplate extends IterativeRobot {
     //initialize robot variables
     RobotDrive driveTrain;
     Joystick joystick;
-    Messager msg;
-    Jaguar motor;
-    AnalogChannel analog1;
+    Messager msg;   
     Controls controls;
-    //set up constant variables
-    int stage = 0;
-    float speed = 0.5f;
-    float time = 0.5f;
-    float inc = 0.05f;
-    float x = 1;
-    float y = 0;
+  
 
     /**
      * This function is run when the robot is first started up and should be
@@ -47,86 +39,18 @@ public class RobotTemplate extends IterativeRobot {
      */   
 
     public void robotInit() {
-        driveTrain = new RobotDrive(1, 2, 3, 4);
+        driveTrain = new RobotDrive(1,3,2,4);
         joystick = new Joystick(1);
         msg = new Messager();
         controls = new Controls(joystick);
-        //analog1 = new AnalogChannel(1);
-        msg.printLn("Hello C:");
+        
+        msg.printLn("Mecanum Bot 2/25/12");
         getWatchdog().setExpiration(10);
         driveTrain.setSafetyEnabled(false);
+        driveTrain.setInvertedMotor(RobotDrive.MotorType.kFrontRight, true);
+        driveTrain.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
+        driveTrain.setExpiration(10);
 
-    }
-
-    private void circle(int stage, float speed, float time, float inc,
-            float x, float y) {
-        switch (stage) {
-            case 0:
-                x -= inc;
-                y += inc;
-                if (y >= 1) {
-                    stage++;
-                }
-                break;
-            case 1:
-                x -= inc;
-                y -= inc;
-                if (x <= -1) {
-                    stage++;
-                }
-                break;
-            case 2:
-                x += inc;
-                y -= inc;
-                if (y <= -1) {
-                    stage++;
-                }
-                break;
-            case 3:
-                x += inc;
-                y += inc;
-                if (x >= 1) {
-                    stage = 0;
-                }
-                break;
-        }
-
-        driveTrain.mecanumDrive_Cartesian(x * speed, y * speed, 0, 0);
-        Timer.delay(time);
-        String s = "Stage: " + stage + " X: " + x + " Y: " + y;
-        msg.printLn(s);
-    }
-
-    private void square() {
-       
-            driveTrain.mecanumDrive_Cartesian(speed, 0, 0, 0);
-            Timer.delay(1);
-            driveTrain.stopMotor();
-            driveTrain.mecanumDrive_Cartesian(0, speed, 0, 0);
-            Timer.delay(1);
-            driveTrain.stopMotor();
-            driveTrain.mecanumDrive_Cartesian(-speed, 0, 0, 0);
-            Timer.delay(1);
-            driveTrain.stopMotor();
-            driveTrain.mecanumDrive_Cartesian(0, -speed, 0, 0);
-            Timer.delay(1);
-            driveTrain.stopMotor();
-        
-
-       
-            driveTrain.mecanumDrive_Cartesian(speed, 0, 0, 0);
-            Timer.delay(2);
-            driveTrain.stopMotor();
-            driveTrain.mecanumDrive_Cartesian(0, speed, 0, 0);
-            Timer.delay(1);
-            driveTrain.stopMotor();
-            driveTrain.mecanumDrive_Cartesian(-speed, 0, 0, 0);
-            Timer.delay(1);
-            driveTrain.stopMotor();
-            driveTrain.mecanumDrive_Cartesian(0, -speed, 0, 0);
-            Timer.delay(1);
-            driveTrain.stopMotor();
-        
     }
 
     /**
@@ -134,7 +58,7 @@ public class RobotTemplate extends IterativeRobot {
      */
     public void autonomousPeriodic() {
        // circle(stage, speed, time, inc, x, y);
-        square();
+       
     }
 
     /**
@@ -143,11 +67,22 @@ public class RobotTemplate extends IterativeRobot {
     public void teleopPeriodic() {
         
 
-        driveTrain.mecanumDrive_Cartesian(joystick.getX(), joystick.getY(), joystick.getZ(), 0);
-
-        if (controls.leftBumper()) {
-            circle(0, 0.5f, 1, .01f, 1, 0);
+         if (controls.button1()) {//trigger reverses drive
+            driveTrain.mecanumDrive_Cartesian(-joystick.getX(), -joystick.getY(), -MathX.pow(joystick.getTwist(), 3), 0);
+            
+        } else {
+            driveTrain.mecanumDrive_Cartesian(joystick.getX(), joystick.getY(), MathX.pow(joystick.getTwist(), 3), 0);
+            
         }
+        System.out.println("1:"+joystick.getRawAxis(1));
+        System.out.println("2:"+joystick.getRawAxis(2));
+        System.out.println("3:"+joystick.getRawAxis(3));
+        System.out.println("4:"+joystick.getRawAxis(4));
+        System.out.println("5:"+joystick.getRawAxis(5));
+        System.out.println("6:"+joystick.getRawAxis(6));
+        System.out.println("-------------------------------------");
+
+        
         
         Timer.delay(0.05f);
 
